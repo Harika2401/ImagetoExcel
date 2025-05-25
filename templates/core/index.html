@@ -1,16 +1,48 @@
-
 {% load static %}
 {% block content %}
-     <h1>Upload a Form Image</h1>
-    <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="file" required>
-        <button type="submit">Upload</button>
-    </form>
-    <br>
-    <a href="{% url 'download_file' %}">Download Excel</a>
-{% endblock content%}
-
-
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; background-color: #f6c1cc; margin: 10% auto; padding: 40px 20px; width: 40%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
     
-     
+    <h1 style="margin-bottom: 30px; color: #333;">Upload a Form Image</h1>
+
+    <form id="uploadForm" action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data" style="width: 100%;">
+        {% csrf_token %}
+
+        <!-- Hidden file input -->
+        <input type="file" name="file" id="fileInput" style="display: none;" required>
+
+        <!-- Custom label for file input -->
+        <label for="fileInput" style="background-color: #0077b6; color: white; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer; display: inline-block; margin-bottom: 20px;">
+            Choose File
+        </label>
+
+        <!-- Upload button -->
+        <br>
+        <button id="uploadButton" type="submit" style="display: none; background-color: #0096c7; color: white; border: none; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px;">
+            Upload
+        </button>
+    </form>
+
+    <!-- Download button -->
+    {% if request.GET.uploaded == "true" %}
+    <a href="{% url 'download_file' %}" style="text-decoration: none;">
+        <button style="background-color: #023e8a; color: white; border: none; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px;">
+            Download Excel
+        </button>
+    </a>
+    {% endif %}
+</div>
+
+<!-- JS to toggle button visibility -->
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const uploadButton = document.getElementById('uploadButton');
+
+    fileInput.addEventListener('change', function () {
+        if (fileInput.files.length > 0) {
+            uploadButton.style.display = 'inline-block';
+        } else {
+            uploadButton.style.display = 'none';
+        }
+    });
+</script>
+{% endblock content %}
