@@ -1,0 +1,16 @@
+
+{% load static %}
+{% block content %}
+     <h1>Upload a Form Image</h1>
+    <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <br>
+    <a href="{% url 'download_file' %}">Download Excel</a>
+{% endblock content%}
+
+
+    
+     

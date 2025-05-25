@@ -1,0 +1,712 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale1.0">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        :root {
+            --pink: #e84393;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            text-transform: capitalize;
+            transition: 2s linear;
+        }
+
+        .container {
+            display: flex;
+            position: relative;
+        }
+
+        html {
+            font-size: 62.5%;
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            padding: 2rem 3%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: 0.5rem 1rem rgba(0, 0, 0, .1);
+        }
+
+        header .navbar a {
+            font-size: 3.4rem;
+            padding: 0 1.5rem;
+            color: #666;
+        }
+
+        header .navbar a:hover {
+            color: var(--pink);
+        }
+
+        header .icons a {
+            font-size: 2.5rem;
+            color: #333;
+            margin-left: 1.5rem;
+        }
+
+        header .icons a:hover {
+            color: var(--pink);
+        }
+
+        header #toggler {
+            display: none;
+
+        }
+
+        header .fa-bars {
+            font-size: 3rem;
+            color: #333;
+            border-radius: .5rem;
+            padding: .5rem 1.5rem;
+            cursor: pointer;
+            display: none;
+            border: .1rem solid rgba(0, 0, 0, .3);
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .image {
+            flex: 1;
+            max-width: 40%;
+            /* Two images side by side */
+            margin: 0px;
+            /* Adjust margin as needed */
+        }
+
+        .image img {
+            width: 100%;
+            /* Make sure images fill their container */
+            height: auto;
+            /* Maintain aspect ratio */
+        }
+
+        .center-section {
+            text-align: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .center-section button {
+            border-radius: 12px;
+            background-color: #a78353;
+            color: aliceblue;
+            font-size: 25px;
+            padding: 1.1em 8.24em;
+            margin: 1em 0;
+            cursor: pointer;
+        }
+
+        .center-section p {
+            font-size: 45px;
+            font-weight: bold;
+            color: #333;
+            margin: 1em 0;
+        }
+
+        @media (max-width:991px) {
+            html {
+                font-size: 55%;
+            }
+
+            header {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width:768px) {
+            header .fa-bars {
+                display: block;
+            }
+
+            header .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #eee;
+                border-top: .1rem solid rgba(0, 0, 0, .1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            }
+
+            header #toggler:checked~.navbar {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+
+            }
+
+            header .navbar a {
+                margin: 1.5rem;
+                padding: 1.5rem;
+                background: #fff;
+                border: .1rem solid rgba(0, 0, 0, .1);
+                display: block;
+            }
+        }
+
+        .title {
+
+            text-align: center;
+            padding: 10px;
+
+        }
+
+        h1 {
+            font-size: 30px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .des {
+            padding: 2px;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 17px;
+            padding-top: 10px;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        button {
+            margin-top: 40px;
+            margin-bottom: 10px;
+            background-color: white;
+            border: 1px solid rgb(186, 161, 61);
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        button:hover {
+            background-color: rgb(186, 161, 61);
+            ;
+            color: white;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+        .section-p1 {
+            padding: 40px 80px;
+        }
+
+        #skinproblems {
+            text-align: center;
+        }
+
+        #skinproblems .prob-container {
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        #skinproblems .prob {
+            width: 23%;
+            min-width: 250px;
+            padding: 10px 12px;
+            border: 1px solid #cce7d0;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+            margin: 15px 0;
+            transition: 0.2s ease;
+        }
+
+        #skinproblems .prob:hover {
+            box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        #skinproblems .prob img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        #pagination {
+            align-items: center;
+        }
+
+        #pagination a {
+            text-decoration: none;
+            background-color: rgb(130, 109, 49);
+            padding: 15px;
+            border-radius: 4px;
+            color: #030000;
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        #prodetails .single-pro-image {
+            width: 40%;
+            margin-right: 10%;
+
+        }
+
+        .small-image-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .small-img-col {
+            flex-basis: 24%;
+            cursor: pointer;
+        }
+
+        #prodetails {
+            display: flex;
+            margin-top: 100px;
+        }
+
+        #prodetails .single-pro-details {
+            width: 50%;
+            padding-top: 2px;
+
+        }
+
+        #prodetails .single-pro-details input {
+            width: 50px;
+            height: 47px;
+            font-size: 16px;
+            padding-left: 10px;
+
+        }
+
+        #prodetails .single-pro-details input:focus {
+            outline: #333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .box-element {
+            box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .containercheckout {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .skinproduct {
+            border-radius: 0 0 4px 4px;
+        }
+
+        .thumnail {
+            width: 100%;
+
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .add-btn,
+        .btn-outline-success {
+            margin: 5px 0;
+            padding: 10px;
+            width: 45%;
+            border: 1px solid #28a745;
+            background-color: transparent;
+            color: #28a745;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .add-btn:hover,
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-top: 10%;
+        }
+
+        .col-lg-4 {
+            flex: 0 0 30%;
+            max-width: 20%;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .Product h4 {
+            color: #333;
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .checkout {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkout-form,
+        .order-summary {
+            width: 45%;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #060606;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .quiz {
+            font-family: 'Times New Roman', Times, serif;
+
+            margin: 0;
+            padding-top: 8%;
+            padding-bottom: 18px;
+        }
+
+        .container2 {
+            text-align: center;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+
+        }
+
+        .container2 h1 {
+            color: #b29f53;
+            margin-bottom: 20px;
+            font-size: 29px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            text-align: left;
+            /* Align text of questions to the left */
+        }
+
+        .question h2 {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .options label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            display: block;
+            /* Display options as block elements */
+            position: relative;
+            /* Added positioning */
+            padding-left: 25px;
+            /* Added padding to the left */
+        }
+
+        .options label:hover {
+            color: #72642b;
+        }
+
+        .options input[type="radio"] {
+            opacity: 0;
+            cursor: pointer;
+            position: absolute;
+            /* Added positioning */
+            left: 0;
+            /* Added positioning */
+            top: 50%;
+            /* Added positioning */
+            transform: translateY(-50%);
+            /* Added positioning */
+        }
+
+        .options input[type="radio"]+label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            border: 2px solid #b29f53;
+            border-radius: 50%;
+            transition: border-color 0.3s ease;
+        }
+
+        .options input[type="radio"]:checked+label::before {
+            border-color: #b29f53;
+            background-color: #b29f53;
+        }
+
+        button:hover {
+            background-color: #080804;
+        }
+
+        .order-summary h2,
+        .checkout-form h2 {
+            margin-bottom: 20px;
+        }
+
+        .summary-item,
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+
+        .summary-total {
+            font-weight: bold;
+        }
+
+        .containercart {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-row {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cart-col-lg-4 {
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .box-element {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #000000;
+        }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .bg-img {
+            background-image: url="({% static 'C:/Users/harik/OneDrive/Desktop/Django/static/image/trial.jpg'%})";
+            background-size: 100%;
+        }
+
+        .button1 {
+
+
+            background-color: rgb(252, 245, 245);
+            border: 1px;
+            border-radius: 5px;
+            padding: 10px;
+            color: rgb(8, 7, 7);
+        }
+
+        @media (max-width:450px) {
+            html {
+                font-size: 50%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fa-bars"></label>
+        <div class="container">
+
+            <a href="{% url 'index'%}"><img
+                    src="{% static 'C:\Users\harik\OneDrive\Desktop\my_project\static\image\logo.png'%}"
+                    style="height: 70px; width: 70px;"></a>
+        </div>
+        <nav class="navbar">
+            <a href="{% url 'skincare'%}">Skincare</a>
+            <a href="{% url 'knownhair'%}">Haircare</a>
+            <a href="{% url 'perfumes'%}">Perfume</a>
+            <a href="{% url 'bathandbody'%}">Bath and body</a>
+            <a href="{% url 'blog'%}">Blog</a>
+
+        </nav>
+       
+    </header>
+</body>
+{% block content %}
+
+{% endblock content %}
+
+<div style="background: #eef8ff;">
+    <footer
+        style="background: linear-gradient(to right, #030304, #734810); color: #fff;padding: 100px 0 30px; border-top-left-radius: 125px; font-size: 13px; line-height: 20px;">
+        <div
+            style="width: 85%; margin: auto; display: flex;flex-wrap: wrap;align-items: flex-start; justify-content: space-between;">
+            <div style="flex-basis:15% ; padding: 10px;">
+                <img src="{% static 'C:/Users/harik/OneDrive/Desktop/my_project/static/image/logo.png'%}"
+                    style="height: 80px; width: 80px;">
+                <p>
+                    Welcome to our exclusive online destination for skin and hair care enthusiasts seeking to elevate
+                    their beauty routines. Our website offers a curated collection of premium products designed to
+                    nourish, rejuvenate, and enhance your skin and hair, empowering you to embrace your natural beauty
+                    with confidence.
+                </p>
+            </div>
+            <div style="flex-basis:15% ; padding: 10px;">
+                <h3 style="width: fit-content; margin-bottom: 40px;position: relative;">Office</h3>
+                <p>Vinaynaagr
+                    <br>Saidabad
+                    <br>Hyderabad-500059,Telangana
+                </p>
+                <p style="width:fit-content;border-bottom: 1px solid #ccc;">hsm@gmail.com</p>
+                <h4>+91 - 0123456789</h4>
+            </div>
+            <div style="flex-basis:15% ; padding: 10px;">
+                <h3 style="width: fit-content; margin-bottom: 40px;position: relative;">Links</h3>
+
+                <a href="index.html" style=" color: #fff;">Home</a><br>
+                <a href="#haircare" style=" color: #fff;">Hair care</a><br>
+                <a href="#skincare" style=" color: #fff;">Skin care</a><br>
+                <a href="#blog" style=" color: #fff;">Blog</a><br>
+                <a href="#offers" style=" color: #fff;">Offers</a><br>
+
+            </div>
+            <div style="flex-basis:15% ; padding: 10px;">
+                <h3 style="width: fit-content; margin-bottom: 40px;position: relative;">Newsletter</h3>
+                <form
+                    style="padding-bottom: 15px; display: flex; align-items: center;justify-content: space-between;border-bottom: 1px solid #ccc; margin-bottom: 50px;">
+                    <i class="far fa-envelope" style="font-size: 18px; margin-right: 10px;"></i>
+                    <input style="width: 100%; background: transparent; color: #ccc;border: 0;outline: none;"
+                        type="email" placeholder="enter your email id" required>
+                    <button class="btn1" style=" background: transparent;border: 0;outline: none;cursor: pointer;"
+                        type="submit"><i class="fas fa-arrow-right" style="font-size: 16px;color: #ccc;"></i></button>
+                </form>
+                <div class="social-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-whatsapp"></i>
+                    <i class="fab fa-pinterest"></i>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p style="text-align: center;">hsm @ 2024 - All Rights Reserved</p>
+    </footer>
+</div>
+
+</html>
