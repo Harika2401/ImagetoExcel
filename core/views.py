@@ -17,7 +17,7 @@ import pytesseract
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
-
+from django.urls import reverse
 from django.conf import settings
 from django.http import FileResponse
 from django.shortcuts import render, redirect
@@ -97,6 +97,7 @@ def upload_file(request):
         file_path = fs.save(uploaded_file.name, uploaded_file)
         full_path = os.path.join(UPLOAD_FOLDER, file_path)
         process_image(full_path)
+        return redirect(reverse('index') + '?uploaded=true')
     return redirect('index')
 
 def process_image(image_path):
